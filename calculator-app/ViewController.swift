@@ -31,9 +31,11 @@ class ViewController: UIViewController {
     }
     
     func evaluateExpression() {
-        let expr = NSExpression(format: workings)
-        let result = expr.expressionValue(with: nil, context: nil) as! Double
-        calcResults.text = formatResult(result: result)
+        if(!workings.isEmpty) {
+            let expr = NSExpression(format: workings)
+            let result = expr.expressionValue(with: nil, context: nil) as! Double
+            calcResults.text = formatResult(result: result)
+        }
     }
 
     @IBAction func tapClear(_ sender: Any) {
@@ -81,13 +83,15 @@ class ViewController: UIViewController {
             return true
         case "+":
             return true
+        case ".":
+            return true
         default:
             return false
         }
     }
     
     func isInputValid(_ input: String) -> Bool {
-        if(input.isEmpty) {
+        if(workings.isEmpty) {
             return true
         }
         
